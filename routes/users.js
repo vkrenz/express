@@ -2,15 +2,31 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/', (req, res) => {
+    console.log(req.query.name)
     res.send('User List')
 })
 
 router.get('/new', (req, res) => {
-    res.send('User New Form')
+    res.render("users/new", {
+        fname: "placeholder text"
+    })
 })
 
 router.post('/', (req, res) => {
-    res.send('Create New User')
+    const isValid = true;
+    if (isValid) {
+        users.push({ firstName: req.body.fname })
+        res.redirect(`/users/${users.length - 1}`)
+    } else {
+        console.log(`Error: User [${req.body.fname}] is not valid.`)
+        res.render('users/new', {
+            fname: req.body.fname
+        })
+    }
+    res.send("Hi")
+    // By default... express cannot access body.
+    // See server.js for express.urlencoded middleware.
+    console.log(req.body.fname)
 })
 
 /** 
@@ -40,7 +56,7 @@ const users = [
  * @see @param next moves onto the next peice of middleware. (.get())
 */
 router.param("id", (req, res, next, id) => {
-    req.user = users[id].name
+    req.user = users[id]
     next()
 })
 

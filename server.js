@@ -1,5 +1,5 @@
 /**
- * @version 1.3
+ * @version 1.4
  * @date 3/10/2022
  * @tutorial {@link https://www.youtube.com/watch?v=SccSCuHhOw0}
  */
@@ -10,6 +10,8 @@ app.set('view engine', 'ejs')
 // Middleware
 app.use(logger)
 app.use(express.static("public"))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 app.get('/', (req, res) => {
     console.log("Hello World!")
