@@ -1,13 +1,15 @@
 /**
- * @version 1.2
+ * @version 1.3
  * @date 3/10/2022
- * @see {@link https://www.youtube.com/watch?v=SccSCuHhOw0}
+ * @tutorial {@link https://www.youtube.com/watch?v=SccSCuHhOw0}
  */
 
 const express = require('express')
 const app = express()
 app.set('view engine', 'ejs')
+// Middleware
 app.use(logger)
+app.use(express.static("public"))
 
 app.get('/', (req, res) => {
     console.log("Hello World!")
